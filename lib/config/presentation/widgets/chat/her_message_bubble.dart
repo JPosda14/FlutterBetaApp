@@ -14,27 +14,45 @@ class HerMessageBubble extends StatelessWidget {
         Container(
           decoration:  BoxDecoration(
             color: colors.secondary, borderRadius: BorderRadius.circular(20)),
-          child:  Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: const   Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
               'Hola mi verga delgada',
-              style: TextStyle(color: colors.primaryContainer),
+              style: TextStyle(color: Colors.white, fontSize: 15),
             ),
           ),
         ),
         const SizedBox(height: 5 ),
-        const _ImageBubble(),
-        //Todo : imagen
+        _ImageBubble(),
+
+        const SizedBox (height: 10),
       ],
     );
   }
 }
 
 class _ImageBubble extends StatelessWidget {
-  const _ImageBubble({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
-    return Image.network('"https://yesno.wtf/assets/yes/4-c53643ecec77153eefb461e053fb4947.gif"');
+final size = MediaQuery.of(context).size;
+
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image.network('https://yesno.wtf/assets/no/8-5e08abbe5aacd2cf531948145b787e9a.gif',
+      width: size.width * 0.7,
+      height: 150,
+      fit: BoxFit.cover,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return  Container(
+        width: size.width * 0.7,
+        height: 150,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: const Text ('Mi mujeh me está enviando una imagen'),);
+      }
+      ));
   }
 }
